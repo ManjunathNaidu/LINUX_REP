@@ -47,10 +47,10 @@ yum -y install php php-mysql
 
 cat /etc/*-release | grep -q "^VERSION=\"7"
 if [ $? -eq 0 ] ; then
-	yum install wget
+	yum -y install wget
 	wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
 	rpm -ivh mysql-community-release-el7-5.noarch.rpm
-	yum install mysql-server
+	yum -y install mysql-server
 	systemctl start mysqld
 	systemctl enable mysqld
 else
