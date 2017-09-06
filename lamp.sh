@@ -37,8 +37,15 @@ OS=`uname`								; export OS
 
 # install Apache and make it on permanently 
 yum -y install httpd
-service httpd start
-chkconfig httpd on
+cat /etc/*-release | grep -q "^VERSION=\"7"
+if [ $? -eq 0 ] ; then
+	systemctl start httpd
+	systemctl enable httpd
+else
+	service httpd start
+	chkconfig httpd on
+fi
+
 
 # install PHP 
 yum -y install php php-mysql
@@ -59,7 +66,7 @@ else
 	chkconfig mysqld on
 fi
 
-yum -y install expect -y
+yum -y install expect
 
 
 
